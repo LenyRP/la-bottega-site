@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { services } from '../../data/services';
+import { business } from '../../data/business';
+
+export function getStaticPaths() {
+  return services.map(s => ({ params: { service: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+---
+<BaseLayout
+  title={service.title + ' in ' + "Palatka, FL" + ' | ' + "La Bottega"}
+  description={"Professional " + service.title.toLowerCase() + " in Palatka, FL. La Bottega is a Coffee & Wine Bar serving Italian eats, tapas, and daily rotating Italian-style meals. Our menu changes  Call  for a free estimate."}
+>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <Breadcrumbs crumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services/' },
+      { label: service.title },
+    ]} />
+    <h1 class="text-4xl font-bold text-ink mb-4">{service.title}</h1>
+    <p class="text-xl text-body mb-8">{service.desc}</p>
+    {service.image && (
+      <div class="overflow-hidden rounded-xl mb-8 aspect-video">
+        <img src={service.image} alt={service.title} class="w-full h-full object-cover" loading="lazy" />
+      </div>
+    )}
+    <a href={'tel:' + business.phone}
+      class="inline-block bg-accent text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-accent-dark transition-colors mb-12">
+      Call {business.phone} for a Free Quote
+    </a>
+    <div class="bg-surface-alt rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-ink mb-4">About Our {service.title} Service</h2>
+      <p class="text-body leading-relaxed">{service.desc}</p>
+    </div>
+  </div>
+  <CTASection heading={'Ready for ' + service.title + '?'} />
+</BaseLayout>

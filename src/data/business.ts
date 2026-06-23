@@ -1,0 +1,22 @@
+export const business = {
+  name: "La Bottega",
+  phone: "",
+  email: "",
+  address: "3323 Saint John's ave,",
+  city: "Palatka",
+  state: "FL",
+  zip: "32177",
+  description: "La Bottega is a Coffee & Wine Bar serving Italian eats, tapas, and daily rotating Italian-style meals. Our menu changes daily and may include dishes such as Fettuccine Alfredo, Chicken Tortellini, Italian-style baby back ribs “Costalletas,” and other European-inspired plates. So whether you’re stopping in for coffee, wine, small plates, or one of our daily dinner features, we’d love to welcome you in.",
+  tagline: "Casual coffee, wine bar, tapas and Italian comfort food",
+  domain: "",
+  accentColor: "#056c3b",
+  offerBanner: "",
+  whatsapp: "",
+  formspreeId: "",
+  videoUrl: "https://www.youtube.com/shorts/XYFK83vC3vE",
+  social: {
+    facebook: "https://www.facebook.com/profile.php?id=61590741543666",
+    instagram: "",
+    google: "",
+  },
+} as const;

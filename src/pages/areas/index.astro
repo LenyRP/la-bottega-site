@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { areas } from '../../data/areas';
+import { business } from '../../data/business';
+---
+<BaseLayout title={'Service Areas | ' + business.name} description={business.name + ' serves these communities'}>
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-ink mb-4">Service Areas</h1>
+    <p class="text-xl text-body mb-10">We proudly serve the following communities:</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {areas.map(a => (
+        <a href={'/areas/' + a.slug + '/'} class="block bg-surface-alt rounded-lg px-6 py-4 font-semibold text-ink hover:bg-accent hover:text-white transition-colors text-center">
+          {a.city}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

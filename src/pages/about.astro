@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+import { business } from '../data/business';
+---
+<BaseLayout title={'About ' + business.name} description={business.description}>
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-ink mb-6">About {business.name}</h1>
+    <p class="text-xl text-body leading-relaxed mb-8">{business.description}</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {[
+        { label: 'Licensed & Insured', desc: 'Fully licensed and insured for your protection.' },
+        { label: 'Local Experts', desc: 'Proudly serving ' + business.city + ' and the surrounding area.' },
+        { label: 'Free Estimates', desc: 'No-obligation quotes on every job.' },
+      ].map(item => (
+        <div class="bg-surface-alt rounded-xl p-6">
+          <h3 class="font-bold text-ink mb-2">{item.label}</h3>
+          <p class="text-body text-sm">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+  <CTASection />
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { areas } from '../../data/areas';
+import { services } from '../../data/services';
+import { business } from '../../data/business';
+
+export function getStaticPaths() {
+  return areas.map(a => ({ params: { area: a.slug }, props: { area: a } }));
+}
+
+const { area } = Astro.props;
+---
+<BaseLayout
+  title={"La Bottega" + ' — ' + area.city + ', ' + "FL"}
+  description={"Serving Palatka and " + area.city + ". Professional la bottega is a coffee & wine bar serving italian eats, tapas, and daily rotatin. Call ."}
+>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <Breadcrumbs crumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Areas', href: '/areas/' },
+      { label: area.city },
+    ]} />
+    <h1 class="text-4xl font-bold text-ink mb-4">{business.name} in {area.city}</h1>
+    <p class="text-xl text-body mb-8">
+      Professional service for {area.city} residents and businesses.
+      Call <a href={'tel:' + business.phone} class="text-accent font-bold">{business.phone}</a> for a free estimate.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+      {services.map(s => (
+        <a href={'/services/' + s.slug + '/' + area.slug + '/'} class="bg-surface-alt border border-line rounded-lg p-5 hover:shadow-md transition-shadow">
+          <h3 class="font-bold text-ink">{s.title}</h3>
+          <p class="text-sm text-body mt-1">{s.desc}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+  <CTASection heading={'Serving ' + area.city} subtext={'Call us for a free estimate on any service.'} />
+</BaseLayout>
